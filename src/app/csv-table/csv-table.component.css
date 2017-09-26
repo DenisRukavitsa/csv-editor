@@ -1,0 +1,27 @@
+.table {
+  display: block;
+  width: fit-content;
+  /*margin: auto;*/
+  margin-top: 0.8%;
+  margin-bottom: 0.4%;
+  border: 0.5px solid rgba(0,0,0,.15);
+  border-radius: .25rem;
+  /*overflow-x: scroll;*/
+  /*overflow-y: hidden;*/
+  /*white-space: nowrap;*/
+}
+
+.table td {
+  padding: 0.3rem;
+}
+
+select.form-control {
+  display: inline;
+  width: fit-content;
+  margin-left: 1em;
+}
+
+.next-button {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
