@@ -5,16 +5,17 @@ import {Subject} from 'rxjs/Subject';
 export class CsvService {
   splittedLines: Array<Array<string>>;
   tableChanges = new Subject<string>();
-  private lines: Array<String>;
+  private csv: string;
+  private lines: Array<string>;
 
   parseCsv(csv: string): void {
-    csv = csv.trim();
+    this.csv = csv.trim();
     if (!this.splittedLines) {
-      this.fullParse(csv);
+      this.fullParse();
     } else {
-      const changedLines = csv.split('\n');
+      const changedLines = this.csv.split('\n');
       if (changedLines.length !== this.lines.length) {
-        this.fullParse(csv);
+        this.fullParse();
       } else {
         this.changeLine(changedLines);
       }
@@ -27,12 +28,13 @@ export class CsvService {
                          newValue,
                          ...lineToChange.slice(column + 1, lineToChange.length)];
     this.lines[row] = changedLine.join(',');
-    this.tableChanges.next(this.lines.join('\n'));
+    this.csv = this.lines.join('\n');
+    this.tableChanges.next(this.csv);
   }
 
-  private fullParse(csv: string) {
+  fullParse() {
     this.splittedLines = [];
-    this.lines = csv.split('\n');
+    this.lines = this.csv.split('\n');
     this.lines.forEach((line) => {
       this.splittedLines.push(line.split(','));
     });

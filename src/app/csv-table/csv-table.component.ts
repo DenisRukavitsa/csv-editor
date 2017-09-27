@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {CsvService} from '../csv.service';
-import {max} from "rxjs/operator/max";
 
 @Component({
   selector: 'app-csv-table',
@@ -19,21 +18,25 @@ export class CsvTableComponent implements OnInit {
   }
 
   previous() {
+    this.csvService.fullParse();
     this.page--;
   }
 
   next() {
+    this.csvService.fullParse();
     this.page++;
   }
 
   goToPage(page: number) {
+    this.csvService.fullParse();
     this.page = page;
   }
 
   changeRowsPerPage($event) {
+    this.csvService.fullParse();
     this.rowsPerPage = $event.srcElement.value;
 
-    const linesCount = this.csvService.splittedLines.length
+    const linesCount = this.csvService.splittedLines.length;
     let maxPageNumber = Math.floor(linesCount / this.rowsPerPage);
     if ((linesCount % this.rowsPerPage) > 0) { maxPageNumber++; }
     if (this.page > (maxPageNumber)) {
