@@ -14,13 +14,25 @@
   padding: 0.3rem;
 }
 
+ul.pagination {
+  display: flex;
+  align-items: center;
+}
+
 select.form-control {
   display: inline;
   width: fit-content;
   margin-left: 1em;
+  margin-right: 0.5em;
+}
+
+.number-button {
+  width: 3em;
+  text-align: center;
 }
 
 .last-button {
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
 }
+

@@ -26,8 +26,10 @@
     <ng-container *ngFor="let line of data; let pageNum = index">
       <li class="page-item"
           [ngClass]="{'active': currentPage === pageNum / rowsPerPage + 1}"
-          *ngIf="(pageNum % rowsPerPage) === 0">
-        <a class="page-link" (click)="goToPage(pageNum / rowsPerPage + 1)">
+          *ngIf="(pageNum % rowsPerPage) === 0 &&
+                 (pageNum / rowsPerPage) < (currentPage + 2) &&
+                 (pageNum / rowsPerPage) > (currentPage - 4)">
+        <a class="page-link number-button" (click)="goToPage(pageNum / rowsPerPage + 1)">
           {{pageNum / rowsPerPage + 1}}
         </a>
       </li>
@@ -43,10 +45,11 @@
       <a class="page-link last-button" (click)="lastPage(false)">Last</a>
     </li>
 
-    <select class="form-control" (change)="changeRowsPerPage($event)">
+    <select class="form-control" id="rowsPerPage" (change)="changeRowsPerPage($event)">
       <ng-container *ngFor="let option of ROWS_PER_PAGE_OPTIONS">
         <option>{{option}}</option>
       </ng-container>
     </select>
+    <label for="rowsPerPage">rows per page</label>
   </ul>
 </div>
