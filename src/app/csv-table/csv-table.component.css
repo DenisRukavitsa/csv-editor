@@ -20,7 +20,7 @@ select.form-control {
   margin-left: 1em;
 }
 
-.next-button {
+.last-button {
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
 }

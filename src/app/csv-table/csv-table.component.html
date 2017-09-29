@@ -1,8 +1,8 @@
 <div *ngIf="csvService && csvService.splittedLines">
   <table class="table table-striped table-responsive">
-    <tr *ngFor="let line of csvService.splittedLines; let row = index">
-      <ng-container *ngIf="(row < (rowsPerPage * page)) &&
-                          (row >= (rowsPerPage * (page - 1)))">
+    <tr *ngFor="let line of data; let row = index">
+      <ng-container *ngIf="(row < (rowsPerPage * currentPage)) &&
+                          (row >= (rowsPerPage * (currentPage - 1)))">
         <th scope="row">{{row + 1}}</th>
         <td *ngFor="let lineCell of line; let column = index">
           <app-csv-table-cell
@@ -15,14 +15,18 @@
   </table>
 
   <ul class="pagination">
-    <li class="page-item" [ngClass]="{'disabled': page === 1}">
-      <a class="page-link" (click)="previous()">Previous</a>
+    <li class="page-item" [ngClass]="{'disabled': currentPage === 1}">
+      <a class="page-link" (click)="firstPage()">First</a>
     </li>
 
-    <ng-container *ngFor="let line of csvService.splittedLines; let pageNum = index">
+    <li class="page-item" [ngClass]="{'disabled': currentPage === 1}">
+      <a class="page-link" (click)="previousPage()">Previous</a>
+    </li>
+
+    <ng-container *ngFor="let line of data; let pageNum = index">
       <li class="page-item"
-          [ngClass]="{'active': page === pageNum / rowsPerPage + 1}"
-          *ngIf="pageNum % rowsPerPage === 0">
+          [ngClass]="{'active': currentPage === pageNum / rowsPerPage + 1}"
+          *ngIf="(pageNum % rowsPerPage) === 0">
         <a class="page-link" (click)="goToPage(pageNum / rowsPerPage + 1)">
           {{pageNum / rowsPerPage + 1}}
         </a>
@@ -30,8 +34,13 @@
     </ng-container>
 
     <li class="page-item"
-        [ngClass]="{'disabled': page >= (csvService.splittedLines.length / rowsPerPage)}">
-      <a class="page-link next-button" (click)="next()">Next</a>
+        [ngClass]="{'disabled': currentPage >= (data.length / rowsPerPage)}">
+      <a class="page-link" (click)="nextPage()">Next</a>
+    </li>
+
+    <li class="page-item"
+        [ngClass]="{'disabled': currentPage >= (data.length / rowsPerPage)}">
+      <a class="page-link last-button" (click)="lastPage(false)">Last</a>
     </li>
 
     <select class="form-control" (change)="changeRowsPerPage($event)">

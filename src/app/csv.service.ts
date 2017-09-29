@@ -4,6 +4,7 @@ import {Subject} from 'rxjs/Subject';
 @Injectable()
 export class CsvService {
   splittedLines: Array<Array<string>>;
+  splittedLinesSubject = new Subject<Array<Array<string>>>();
   tableChanges = new Subject<string>();
   private csv: string;
   private lines: Array<string>;
@@ -38,6 +39,8 @@ export class CsvService {
     this.lines.forEach((line) => {
       this.splittedLines.push(line.split(','));
     });
+
+    this.splittedLinesSubject.next(this.splittedLines);
   }
 
   private changeLine(changedLines: Array<string>) {
@@ -48,6 +51,8 @@ export class CsvService {
       }
     }
     this.lines = changedLines;
+
+    this.splittedLinesSubject.next(this.splittedLines);
   }
 
 }
