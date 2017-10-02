@@ -11,6 +11,8 @@ export class CsvTableComponent implements OnInit {
   public readonly ROWS_PER_PAGE_OPTIONS = [5, 10, 20, 40];
   public rowsPerPage = this.ROWS_PER_PAGE_OPTIONS[0];
   public currentPage = 1;
+  public maxPageNumber = 0;
+  public mathFloor = Math.floor;
 
   constructor(public csvService: CsvService) {
   }
@@ -39,16 +41,16 @@ export class CsvTableComponent implements OnInit {
 
   lastPage(check: boolean) {
     const linesCount = this.data.length;
-    let maxPageNumber = Math.floor(linesCount / this.rowsPerPage);
-    if ((linesCount % this.rowsPerPage) > 0) { maxPageNumber++; }
+    this.maxPageNumber = Math.floor(linesCount / this.rowsPerPage);
+    if ((linesCount % this.rowsPerPage) > 0) { this.maxPageNumber++; }
     if (check) {
-      if (this.currentPage > maxPageNumber) {
-        this.currentPage = maxPageNumber;
+      if (this.currentPage > this.maxPageNumber) {
+        this.currentPage = this.maxPageNumber;
       } else {
         return;
       }
     } else {
-      this.currentPage = maxPageNumber;
+      this.currentPage = this.maxPageNumber;
     }
   }
 

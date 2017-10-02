@@ -27,8 +27,8 @@
       <li class="page-item"
           [ngClass]="{'active': currentPage === pageNum / rowsPerPage + 1}"
           *ngIf="(pageNum % rowsPerPage) === 0 &&
-                 (pageNum / rowsPerPage) < (currentPage + 2) &&
-                 (pageNum / rowsPerPage) > (currentPage - 4)">
+                 (pageNum / rowsPerPage) < (currentPage + 2 + mathFloor(2 / currentPage)) &&
+                 (pageNum / rowsPerPage) > (currentPage - 4 - mathFloor(2 / (maxPageNumber - currentPage + 1)))">
         <a class="page-link number-button" (click)="goToPage(pageNum / rowsPerPage + 1)">
           {{pageNum / rowsPerPage + 1}}
         </a>
@@ -36,12 +36,12 @@
     </ng-container>
 
     <li class="page-item"
-        [ngClass]="{'disabled': currentPage >= (data.length / rowsPerPage)}">
+        [ngClass]="{'disabled': currentPage >= (maxPageNumber)}">
       <a class="page-link" (click)="nextPage()">Next</a>
     </li>
 
     <li class="page-item"
-        [ngClass]="{'disabled': currentPage >= (data.length / rowsPerPage)}">
+        [ngClass]="{'disabled': currentPage >= (maxPageNumber)}">
       <a class="page-link last-button" (click)="lastPage(false)">Last</a>
     </li>
 
