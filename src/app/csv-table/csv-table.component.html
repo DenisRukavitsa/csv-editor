@@ -42,7 +42,7 @@
 
     <li class="page-item"
         [ngClass]="{'disabled': currentPage >= (maxPageNumber)}">
-      <a class="page-link last-button" (click)="lastPage(false)">Last</a>
+      <a class="page-link last-button" (click)="lastPage()">Last</a>
     </li>
 
     <select class="form-control" id="rowsPerPage" (change)="changeRowsPerPage($event)">

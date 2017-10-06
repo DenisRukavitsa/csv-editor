@@ -6,13 +6,17 @@ import { CsvTextComponent } from './csv-text/csv-text.component';
 import {CsvService} from './csv.service';
 import { CsvTableComponent } from './csv-table/csv-table.component';
 import { CsvTableCellComponent } from './csv-table-cell/csv-table-cell.component';
+import { HeaderComponent } from './header/header.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CsvTextComponent,
     CsvTableComponent,
-    CsvTableCellComponent
+    CsvTableCellComponent,
+    HeaderComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule

@@ -9,7 +9,7 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class CsvTableComponent implements OnInit, OnDestroy {
   public data = [];
-  public readonly ROWS_PER_PAGE_OPTIONS = [5, 10, 20, 40];
+  public readonly ROWS_PER_PAGE_OPTIONS = [5, 10, 20, 30];
   public rowsPerPage = this.ROWS_PER_PAGE_OPTIONS[0];
   public currentPage = 1;
   public maxPageNumber = 0;
@@ -27,7 +27,9 @@ export class CsvTableComponent implements OnInit, OnDestroy {
 
     this.textChangesSubscription = this.csvService.textChanges.subscribe(value => {
       this.data = value;
-      this.lastPage(true);
+
+      this.calculateLastPage();
+      this.checkIfLastPage();
     });
   }
 
@@ -51,19 +53,10 @@ export class CsvTableComponent implements OnInit, OnDestroy {
     this.currentPage++;
   }
 
-  lastPage(check: boolean) {
-    const linesCount = this.data.length;
-    this.maxPageNumber = Math.floor(linesCount / this.rowsPerPage);
-    if ((linesCount % this.rowsPerPage) > 0) { this.maxPageNumber++; }
-    if (check) {
-      if (this.currentPage > this.maxPageNumber) {
-        this.currentPage = this.maxPageNumber;
-      } else {
-        return;
-      }
-    } else {
-      this.currentPage = this.maxPageNumber;
-    }
+  lastPage() {
+    this.csvService.getTableUpdates();
+    this.calculateLastPage();
+    this.currentPage = this.maxPageNumber;
   }
 
   goToPage(currentPage: number) {
@@ -74,7 +67,20 @@ export class CsvTableComponent implements OnInit, OnDestroy {
   changeRowsPerPage(event) {
     this.csvService.getTableUpdates();
     this.rowsPerPage = event.target.value;
-    this.lastPage(true);
+    this.calculateLastPage();
+    this.checkIfLastPage();
+  }
+
+  private calculateLastPage() {
+    const linesCount = this.data.length;
+    this.maxPageNumber = Math.floor(linesCount / this.rowsPerPage);
+    if ((linesCount % this.rowsPerPage) > 0) { this.maxPageNumber++; }
+  }
+
+  private checkIfLastPage() {
+    if (this.currentPage > this.maxPageNumber) {
+      this.lastPage();
+    }
   }
 
 }

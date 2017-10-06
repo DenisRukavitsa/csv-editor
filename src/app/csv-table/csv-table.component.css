@@ -23,7 +23,12 @@ select.form-control {
   display: inline;
   width: fit-content;
   margin-left: 1em;
-  margin-right: 0.5em;
+  margin-right: .5em;
+}
+
+.page-item.active .page-link {
+  background-color: green;
+  border-color: green;
 }
 
 .number-button {

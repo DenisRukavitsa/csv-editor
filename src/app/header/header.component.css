@@ -1,0 +1,19 @@
+.navbar {
+  background-color: transparent;
+  margin-bottom: .5em;
+  border-bottom: .1em solid green;
+  padding: .3em .5em;
+  z-index: 1;
+}
+
+.navbar-brand {
+  color: green;
+}
+
+button.btn-link {
+  color: rgb(33, 37, 41);
+}
+
+button.btn-link:hover {
+  color: green;
+}
