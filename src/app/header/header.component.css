@@ -6,7 +6,8 @@
   z-index: 1;
 }
 
-.navbar-brand {
+.navbar-brand,
+.navbar-brand:hover {
   color: green;
 }
 
@@ -14,6 +15,12 @@ button.btn-link {
   color: rgb(33, 37, 41);
 }
 
-button.btn-link:hover {
+button.btn-link:hover,
+button.btn-link:focus {
   color: green;
+  text-decoration: none;
+}
+
+li.nav-item input {
+  display: none;
 }

@@ -6,6 +6,7 @@ export class CsvService {
   lineChanges = new Subject<{line: number; data: Array<string>}>();
   textChanges = new Subject<Array<Array<string>>>();
   tableChanges = new Subject<string>();
+  csvUploaded = new Subject<string>();
   private updatedLines = [];
   private lines = [];
 
@@ -13,7 +14,7 @@ export class CsvService {
     csv = csv.trim();
     const changedLines = csv.split('\n');
     if (changedLines.length !== this.lines.length) {
-      this.fullParse(csv);
+      this.fullParse(csv, '\n');
     } else {
       this.changeLine(changedLines);
     }
@@ -37,9 +38,18 @@ export class CsvService {
     this.updatedLines = [];
   }
 
-  private fullParse(csv: string) {
+  fileUploaded(file: string) {
+    this.csvUploaded.next(file);
+    if (file.includes('\n')) {
+      this.fullParse(file.trim(), '\n');
+    } else {
+      this.fullParse(file.trim(), '\r');
+    }
+  }
+
+  private fullParse(csv: string, separator: string) {
     const splittedLines = [];
-    this.lines = csv.split('\n');
+    this.lines = csv.split(separator);
     this.lines.forEach(line => {
       splittedLines.push(line.split(','));
     });

@@ -8,6 +8,7 @@ import { CsvTableComponent } from './csv-table/csv-table.component';
 import { CsvTableCellComponent } from './csv-table-cell/csv-table-cell.component';
 import { HeaderComponent } from './header/header.component';
 import { AboutComponent } from './about/about.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AboutComponent } from './about/about.component';
     CsvTableComponent,
     CsvTableCellComponent,
     HeaderComponent,
-    AboutComponent
+    AboutComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule
