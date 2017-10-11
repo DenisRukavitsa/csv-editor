@@ -7,3 +7,17 @@ body {
 .form-control:focus {
   border-color: green;
 }
+
+button.btn-link,
+button.btn-link:focus {
+  color: rgb(33, 37, 41);
+  text-decoration: none;
+}
+
+button.btn-link:hover {
+  color: green;
+}
+
+button.btn-link:hover[disabled] {
+  color: #868e96;
+}

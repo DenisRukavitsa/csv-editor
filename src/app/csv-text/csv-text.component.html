@@ -1,8 +1,27 @@
-<textarea
-  id="csvText"
-  class="form-control"
-  placeholder="Paste CSV here or upload it using the link in the top right corner..."
-  rows="12"
-  (keyup)="onKeyup(csv)"
-  #csv>
-</textarea>
+<div class="flex-row">
+  <textarea
+    id="csvText"
+    class="form-control"
+    placeholder="Paste CSV here or upload it..."
+    rows="12"
+    (keyup)="onKeyup(csv)"
+    #csv></textarea>
+  <div class="flex-column">
+    <div>
+      <input type="file" accept=".csv" (change)="csvUploaded($event)" #uploadInput>
+      <button type="button" class="btn btn-link" (click)="uploadCsv(uploadInput)">
+        <i class="fa fa-upload fa-2x"></i><br> Upload
+      </button>
+    </div>
+    <div>
+      <button type="button" class="btn btn-link" (click)="downloadCsv()">
+        <i class="fa fa-floppy-o fa-2x"></i><br> Save
+      </button>
+    </div>
+    <div>
+      <button type="button" class="btn btn-link" disabled>
+        <i class="fa fa-clipboard fa-2x"></i><br> Copy
+      </button>
+    </div>
+  </div>
+</div>

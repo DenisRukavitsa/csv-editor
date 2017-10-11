@@ -20,6 +20,19 @@ export class CsvService {
     }
   }
 
+  fileUploaded(file: string) {
+    this.csvUploaded.next(file);
+    if (file.includes('\n')) {
+      this.fullParse(file.trim(), '\n');
+    } else {
+      this.fullParse(file.trim(), '\r');
+    }
+  }
+
+  getCsv(): string {
+    return this.lines.join('\n');
+  }
+
   cellChange(row: number, column: number, newValue: string) {
     this.updatedLines.push(row);
 
@@ -36,15 +49,6 @@ export class CsvService {
       this.lineChanges.next({line: updatedLine, data: this.lines[updatedLine].split(',')});
     });
     this.updatedLines = [];
-  }
-
-  fileUploaded(file: string) {
-    this.csvUploaded.next(file);
-    if (file.includes('\n')) {
-      this.fullParse(file.trim(), '\n');
-    } else {
-      this.fullParse(file.trim(), '\r');
-    }
   }
 
   private fullParse(csv: string, separator: string) {
