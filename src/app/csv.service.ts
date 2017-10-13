@@ -29,10 +29,6 @@ export class CsvService {
     }
   }
 
-  getCsv(): string {
-    return this.lines.join('\n');
-  }
-
   cellChange(row: number, column: number, newValue: string) {
     this.updatedLines.push(row);
 

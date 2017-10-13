@@ -38,6 +38,25 @@ export class CsvTextComponent implements OnInit, OnDestroy {
     input.click();
   }
 
+  downloadCsv(textArea: HTMLTextAreaElement) {
+    const date = new Date();
+    saver.saveAs(new Blob([textArea.value],
+      {type: 'text/plain;charset=utf-8'}),
+      'csv-online-editor_' +
+      `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}_` +
+      `${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}.csv`);
+  }
+
+  copyCsv(textArea: HTMLTextAreaElement) {
+    textArea.select();
+    document.execCommand('copy');
+  }
+
+  clearCsv(textArea: HTMLTextAreaElement) {
+    textArea.value = '';
+    this.csvService.parseCsv('');
+  }
+
   csvUploaded($event) {
     const file = $event.target.files[0];
     const fileReader = new FileReader();
@@ -53,15 +72,6 @@ export class CsvTextComponent implements OnInit, OnDestroy {
       $event.target.value = '';
     };
     fileReader.readAsText(file);
-  }
-
-  downloadCsv() {
-    const date = new Date();
-    saver.saveAs(new Blob([this.csvService.getCsv()],
-      {type: 'text/plain;charset=utf-8'}),
-      'csv-online-editor_' +
-      `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}_` +
-      `${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}.csv`);
   }
 
 }

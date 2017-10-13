@@ -3,9 +3,10 @@
     id="csvText"
     class="form-control"
     placeholder="Paste CSV here or upload it..."
-    rows="12"
+    rows="14"
     (keyup)="onKeyup(csv)"
     #csv></textarea>
+
   <div class="flex-column">
     <div>
       <input type="file" accept=".csv" (change)="csvUploaded($event)" #uploadInput>
@@ -13,14 +14,31 @@
         <i class="fa fa-upload fa-2x"></i><br> Upload
       </button>
     </div>
+
     <div>
-      <button type="button" class="btn btn-link" (click)="downloadCsv()">
+      <button *ngIf="csv.value" type="button" class="btn btn-link" (click)="downloadCsv(csv)">
+        <i class="fa fa-floppy-o fa-2x"></i><br> Save
+      </button>
+      <button *ngIf="!csv.value" disabled type="button" class="btn btn-link">
         <i class="fa fa-floppy-o fa-2x"></i><br> Save
       </button>
     </div>
+
     <div>
-      <button type="button" class="btn btn-link" disabled>
+      <button *ngIf="csv.value" type="button" class="btn btn-link" (click)="copyCsv(csv)">
         <i class="fa fa-clipboard fa-2x"></i><br> Copy
+      </button>
+      <button *ngIf="!csv.value" disabled type="button" class="btn btn-link">
+        <i class="fa fa-clipboard fa-2x"></i><br> Copy
+      </button>
+    </div>
+
+    <div>
+      <button *ngIf="csv.value" type="button" class="btn btn-link" (click)="clearCsv(csv)">
+        <i class="fa fa-eraser fa-2x"></i><br> Clear
+      </button>
+      <button *ngIf="!csv.value" disabled type="button" class="btn btn-link">
+        <i class="fa fa-eraser fa-2x"></i><br> Clear
       </button>
     </div>
   </div>
