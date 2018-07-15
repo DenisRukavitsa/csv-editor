@@ -1,8 +1,7 @@
 .table {
   display: block;
   width: fit-content;
-  margin-top: 0.8%;
-  margin-bottom: 0.4%;
+  margin: 0.7em 0 0.3em 0;
   border: 0.5px solid rgba(0,0,0,.15);
   border-radius: .25rem;
   overflow-x: scroll;
@@ -17,13 +16,15 @@
 ul.pagination {
   display: flex;
   align-items: center;
+  margin-bottom: 0.7em;
 }
 
-select.form-control {
+#rowsPerPage {
   display: inline;
   width: fit-content;
-  margin-left: 1em;
-  margin-right: .5em;
+  margin: 0 .5em;
+  padding: 0;
+  height: 2.8em;
 }
 
 .page-item.active .page-link {
@@ -31,13 +32,85 @@ select.form-control {
   border-color: green;
 }
 
-.number-button {
+.page-link,
+#rowsPerPage {
+  font-size: .7em;
+}
+
+.page-link-number {
   width: 3em;
   text-align: center;
 }
 
-.last-button {
+.page-link-last {
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
 }
 
+.page-link-first:after {
+  content: "<<";
+}
+
+.page-link-last:after {
+  content: ">>";
+}
+
+.page-link-previous {
+  display: none;
+}
+
+.page-link-next {
+  display: none;
+}
+
+label {
+  display: none;
+}
+
+@media (min-width: 420px) {
+  .page-link,
+  #rowsPerPage {
+    font-size: 1em;
+  }
+
+  #rowsPerPage {
+    padding: .3em .5em;
+    height: 2.35em;
+  }
+}
+
+@media (min-width: 576px) {
+  .page-link-previous {
+    display: block;
+  }
+
+  .page-link-next {
+    display: block;
+  }
+
+  .page-link-first:after {
+    content: "First";
+  }
+
+  .page-link-previous:after {
+    content: "Previous";
+  }
+
+  .page-link-next:after {
+    content: "Next";
+  }
+
+  .page-link-last:after {
+    content: "Last";
+  }
+}
+
+@media (min-width: 710px) {
+  label {
+    display: block;
+  }
+
+  select.form-control {
+    margin-left: 1em;
+  }
+}

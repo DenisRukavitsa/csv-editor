@@ -1,4 +1,5 @@
 .navbar {
+  align-items: flex-start;
   background-color: transparent;
   margin-bottom: .5em;
   border-bottom: .1em solid green;
@@ -9,4 +10,49 @@
 .navbar-brand,
 .navbar-brand:hover {
   color: green;
+}
+
+.navbar-brand {
+  font-size: 1.1em;
+}
+
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.navbar-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.btn-link, .navbar-toggler {
+  padding: 0.4em 0;
+}
+
+.navbar-toggler {
+  border: none;
+  padding: 0.2em 0;
+}
+
+.navbar-toggler:focus {
+  outline: none;
+}
+
+@media (min-width: 330px) {
+  .navbar-brand {
+    font-size: 1.25em;
+  }
+}
+
+@media (min-width: 576px) {
+  .navbar-nav {
+    flex-direction: row;
+  }
+
+  .btn-link {
+    padding: 0.5em;
+  }
 }

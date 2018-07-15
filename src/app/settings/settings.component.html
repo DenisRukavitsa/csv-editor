@@ -1,4 +1,4 @@
-<div class="modal-dialog modal-lg" role="document">
+<div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title" id="exampleModalLabel">Settings</h5>
@@ -6,12 +6,33 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
+
     <div class="modal-body">
-      TODO
+      <form [formGroup]="settingsForm">
+        <div class="form-group">
+          <label for="separator">Separator</label>
+          <select class="form-control" id="separator" [formControl]="separatorControl">
+            <option>Comma</option>
+            <option>Tab</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="stringTerminator">String terminator</label>
+          <select class="form-control" id="stringTerminator" [formControl]="stringTerminatorControl">
+            <option>None</option>
+            <option>Double quote</option>
+            <option>Single quote</option>
+          </select>
+        </div>
+      </form>
     </div>
+
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-      <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+      <button type="button" class="btn btn-success" data-dismiss="modal" (click)="saveSettings()">
+        Save
+      </button>
     </div>
   </div>
 </div>

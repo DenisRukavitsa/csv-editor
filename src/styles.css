@@ -14,6 +14,10 @@ button.btn-link:focus {
   text-decoration: none;
 }
 
+button.btn-link:not([disabled]) {
+  cursor: pointer;
+}
+
 button.btn-link:hover {
   color: green;
 }

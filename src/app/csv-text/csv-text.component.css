@@ -1,15 +1,28 @@
-.flex-row {
-  display: flex;
-}
-
-.flex-column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 input {
   display: none;
 }
 
+.csv-text {
+  display: flex;
+  flex-direction: column;
+}
 
+.csv-text-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  z-index: 1;
+}
+
+@media (min-width: 576px) {
+  .csv-text {
+    flex-direction: row;
+  }
+
+  .csv-text-actions {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    order: 1;
+  }
+}

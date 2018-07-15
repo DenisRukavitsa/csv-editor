@@ -1,13 +1,6 @@
-<div class="flex-row">
-  <textarea
-    id="csvText"
-    class="form-control"
-    placeholder="Paste CSV here or upload it..."
-    rows="14"
-    (keyup)="onKeyup(csv)"
-    #csv></textarea>
+<div class="csv-text">
 
-  <div class="flex-column">
+  <div class="csv-text-actions">
     <div>
       <input type="file" accept=".csv" (change)="csvUploaded($event)" #uploadInput>
       <button type="button" class="btn btn-link" (click)="uploadCsv(uploadInput)">
@@ -42,4 +35,12 @@
       </button>
     </div>
   </div>
+
+  <textarea
+    id="csvText"
+    class="form-control"
+    placeholder="Paste CSV here or upload it..."
+    rows="14"
+    (keyup)="onKeyup(csv)"
+    #csv></textarea>
 </div>

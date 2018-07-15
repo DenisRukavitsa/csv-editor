@@ -9,7 +9,7 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class CsvTableComponent implements OnInit, OnDestroy {
   public data = [];
-  public readonly ROWS_PER_PAGE_OPTIONS = [5, 10, 20, 30];
+  public readonly ROWS_PER_PAGE_OPTIONS = [5, 10, 20];
   public rowsPerPage = this.ROWS_PER_PAGE_OPTIONS[0];
   public currentPage = 1;
   public maxPageNumber = 0;
